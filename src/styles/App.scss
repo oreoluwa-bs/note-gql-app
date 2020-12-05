@@ -1,3 +1,7 @@
-@import '/components/components.scss';
+@import 'variables';
 
-@import '/base/base.scss';
+@import 'base/base';
+
+@import 'views/views';
+
+@import 'components/components';

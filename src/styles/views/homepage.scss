@@ -1,0 +1,8 @@
+.hero {
+  &__image {
+    background-image: url('../../assets/images/hero__image.jpeg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100vh;
+  }
+}
