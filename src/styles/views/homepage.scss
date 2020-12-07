@@ -1,8 +1,39 @@
+.navbar {
+  max-width: 150rem;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.logo {
+  margin-left: 2rem;
+}
+
+.home {
+  background-image: url('../../assets/images/hero__image.jpeg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right center;
+  min-height: 100vh;
+}
+
 .hero {
-  &__image {
-    background-image: url('../../assets/images/hero__image.jpeg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 100vh;
+  display: flex;
+  height: 80vh;
+  align-items: center;
+
+  &__content {
+    flex: 0 0 50%;
+    margin-left: 15rem;
+    padding: 5rem;
+  }
+
+  &__header {
+    margin-bottom: 3rem;
+    font-size: 4rem;
+  }
+
+  &__subhead {
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
   }
 }
