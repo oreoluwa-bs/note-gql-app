@@ -6,7 +6,7 @@
   }
 
   &-container {
-    border-radius: 3px;
+    border-radius: 10px;
     padding: 3rem;
     background-color: #fff;
   }
@@ -16,7 +16,9 @@
   &-input {
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid gainsboro;
+    // border: 1px solid gainsboro;
+    border: none;
+    background-color: var(--color-lightgrey-1);
     border-radius: 3px;
     padding: 1rem;
     font-size: inherit;
@@ -27,7 +29,11 @@
   }
 }
 
+.heading {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
 .heading-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #777;
 }

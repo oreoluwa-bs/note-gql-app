@@ -1,15 +1,12 @@
 import React from 'react';
-import Logo from '../../assets/images/Logo.svg';
+import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 
 const HomePage = () => {
   return (
     <div>
       <div className="home">
-        <header className="header">
-          <nav className="navbar">
-            <img src={Logo} alt="Logo" className="logo" />
-          </nav>
-        </header>
+        <Navbar />
         <div className="hero">
           <div className="hero__content">
             <span>
@@ -21,7 +18,9 @@ const HomePage = () => {
                 Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt
                 fox. Bright vixens jump; dozy fowl quack.
               </p>
-              <button className="btn btn__primary">Get Started</button>
+              <Link to="/signup" className="btn btn__primary">
+                Get Started
+              </Link>
             </span>
           </div>
         </div>

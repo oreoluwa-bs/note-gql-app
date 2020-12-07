@@ -1,0 +1,14 @@
+.auth-page {
+  min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-primary),
+    #6094b5
+  );
+}
+.auth-wrapper {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 import { formReducer } from '../../store/reducers/form';
 
 const SignUpPage = () => {
@@ -10,22 +12,19 @@ const SignUpPage = () => {
   };
 
   return (
-    <div>
-      <div
-        style={{
-          minHeight: '100vh',
-          background: 'royalblue',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
+    <div className="auth-page">
+      <Navbar logoColor="#fff" />
+      <div className="auth-wrapper">
         <form
+          action="#"
           className="form"
           style={{ flex: '0 1 30%' }}
           onSubmit={handleSubmit}>
           <div className="form-container">
-            <h2>Sign Up</h2>
-            <p className="heading-subtitle">So we can identify you</p>
+            <h2 className="heading">Create an account</h2>
+            <p className="heading-subtitle">
+              Start keeping your notes properly
+            </p>
             <div className="form-group">
               <fieldset>
                 <label htmlFor="email">
@@ -55,7 +54,10 @@ const SignUpPage = () => {
               </fieldset>
             </div>
             <div className="form-group">
-              <button className="btn">Sign Up</button>
+              <Link to="/signup">Already Have an account? Sign in</Link>
+            </div>
+            <div className="form-group" style={{ textAlign: 'right' }}>
+              <button className="btn btn__primary">Sign In</button>
             </div>
           </div>
         </form>
