@@ -1,0 +1,44 @@
+.side-nav {
+  flex: 0 0 25%;
+  min-height: 100vh;
+  border-top-right-radius: 7.5rem;
+  background-color: var(--color-primary);
+  padding: 2rem 0;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+
+    &__icon {
+      box-sizing: content-box;
+      height: 2.2rem;
+      width: 2.2rem;
+      fill: currentColor;
+    }
+  }
+
+  &__link:link,
+  &__link:visited {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &__link__item {
+    padding: 4rem;
+    color: inherit;
+  }
+
+  &__link:hover &__link__item,
+  &__link:active &__link__item,
+  &__link-active &__link__item {
+    background-color: rgba(#fff, 0.2);
+  }
+}
+
+.note-page {
+  background-color: orange;
+  height: 100vh;
+  width: 100%;
+}

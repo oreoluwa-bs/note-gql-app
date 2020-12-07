@@ -5,9 +5,17 @@
   font-size: 1.6rem;
   text-decoration: none;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &__primary {
     background-color: var(--color-primary);
     color: #fff;
+
+    &:hover {
+      background-color: lighten(#52ad9c, 10);
+    }
   }
 
   &__secondary {

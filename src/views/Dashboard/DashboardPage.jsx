@@ -2,34 +2,48 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
+import sprite from '../../assets/images/sprite.svg';
+
 const DashboardPage = () => {
   return (
     <div style={{ display: 'flex' }}>
-      <div
-        className="side-nav"
-        style={{
-          flex: '0 0 25%',
-          minHeight: '100vh',
-          borderTopRightRadius: '10rem',
-          backgroundColor: 'var(--color-primary)'
-        }}>
-        <div
-          className="top"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}>
+      <div className="side-nav">
+        <div className="side-nav__header">
           <Navbar logoColor="#fff" />
-          <h2>My Notes</h2>
+          <h2 className="heading" style={{ color: '#fff' }}>
+            My Notes
+          </h2>
           <div>
-            <button className="btn">+</button>
-            <button className="btn">+</button>
+            <button className="btn btn__primary">
+              <svg className="side-nav__header__icon">
+                <use xlinkHref={`${sprite}#icon-plus`} />
+              </svg>
+            </button>
+            <button className="btn btn__primary">
+              <svg className="side-nav__header__icon">
+                <use xlinkHref={`${sprite}#icon-magnifying-glass`} />
+              </svg>
+            </button>
           </div>
         </div>
-        <div>
-          <NavLink to="/dashboard">
-            <div style={{ padding: '4rem' }}>
+        <div className="side-nav__links">
+          <NavLink
+            to="/dashboard"
+            className="side-nav__link"
+            activeClassName="side-nav__link-active">
+            <div className="side-nav__link__item">
+              <h3>Lorem Ipsum</h3>
+              <span>
+                The quick, brown fox jumps over a lazy dog. DJs flock by when
+                MTV ax quiz prog.
+              </span>
+            </div>
+          </NavLink>
+          <NavLink
+            to="/dashboard/s"
+            className="side-nav__link"
+            activeClassName="side-nav__link-active">
+            <div className="side-nav__link__item">
               <h3>Lorem Ipsum</h3>
               <span>
                 The quick, brown fox jumps over a lazy dog. DJs flock by when
@@ -39,12 +53,7 @@ const DashboardPage = () => {
           </NavLink>
         </div>
       </div>
-      <div
-        style={{
-          backgroundColor: 'orange',
-          height: '100vh',
-          width: '100%'
-        }}></div>
+      <div className="note-page"></div>
     </div>
   );
 };
