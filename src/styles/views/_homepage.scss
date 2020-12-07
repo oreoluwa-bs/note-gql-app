@@ -10,11 +10,18 @@
 }
 
 .home {
+  // background-color: var(--color-primary);
   background-image: url('../../assets/images/hero__image.jpeg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right center;
   min-height: 100vh;
+}
+
+@media only screen and (max-width: 42.5em) {
+  .home {
+    background-image: none;
+  }
 }
 
 .hero {
@@ -26,6 +33,20 @@
     flex: 0 0 50%;
     margin-left: 15rem;
     padding: 5rem;
+  }
+  @media only screen and (max-width: 42.5em) {
+    &__content {
+      flex: 0 0 100%;
+      margin-left: 5rem;
+      padding: 5rem;
+    }
+  }
+  @media only screen and (max-width: 30.5em) {
+    &__content {
+      flex: 0 0 100%;
+      margin-left: 0;
+      padding: 5rem;
+    }
   }
 
   &__header {

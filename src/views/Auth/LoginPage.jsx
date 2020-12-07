@@ -15,11 +15,7 @@ const LoginPage = () => {
     <div className="auth-page">
       <Navbar logoColor="#fff" />
       <div className="auth-wrapper">
-        <form
-          action="#"
-          className="form"
-          style={{ flex: '0 1 30%' }}
-          onSubmit={handleSubmit}>
+        <form action="#" className="form" onSubmit={handleSubmit}>
           <div className="form-container">
             <h2 className="heading">Sign in to your account</h2>
             <p className="heading-subtitle">
