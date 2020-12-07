@@ -50,10 +50,10 @@ const SignUpPage = () => {
               </fieldset>
             </div>
             <div className="form-group">
-              <Link to="/signup">Already Have an account? Sign in</Link>
+              <Link to="/signin">Already Have an account? Sign in</Link>
             </div>
             <div className="form-group" style={{ textAlign: 'right' }}>
-              <button className="btn btn__primary">Sign In</button>
+              <button className="btn btn__primary">Create my account</button>
             </div>
           </div>
         </form>
