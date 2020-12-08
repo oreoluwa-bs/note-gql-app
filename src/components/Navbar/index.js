@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo';
 
-// eslint-disable-next-line react/prop-types
 const Navbar = ({ logoColor }) => {
   return (
     <header className="header">

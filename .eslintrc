@@ -26,6 +26,7 @@
     // "extends": ["eslint:recommended"],
     // "plugins": ["react/recommended","jsx-a11y/recommended","prettier/recommended"],
     "rules": {
+        "react/prop-types": "off",
         "prettier/prettier": ["error", {
             "endOfLine":"auto"
         }]

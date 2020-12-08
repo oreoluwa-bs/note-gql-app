@@ -1,8 +1,6 @@
 import React from 'react';
 
-const Logo = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { color } = props;
+const Logo = ({ color }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
