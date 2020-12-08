@@ -1,15 +1,19 @@
-import React, { useReducer } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useReducer } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import { AuthContext } from '../../store/context/auth';
 import { formReducer } from '../../store/reducers/form';
 
 const SignUpPage = () => {
+  const { auth, handleSignUp } = useContext(AuthContext);
   const [formData, setFormData] = useReducer(formReducer, {});
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    await handleSignUp(formData);
   };
+
+  if (auth) return <Redirect to="/dashboard" />;
 
   return (
     <div className="auth-page">

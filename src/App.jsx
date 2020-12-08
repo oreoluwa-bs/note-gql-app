@@ -5,23 +5,26 @@ import { HomePage } from './views/Main';
 import { LoginPage, SignUpPage } from './views/Auth';
 import './styles/App.scss';
 import DashboardPage from './views/Dashboard/DashboardPage';
+import RootProvider from './store/context';
 
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
-        <Switch>
-          {/* Main Pages */}
-          <Route exact path="/" component={HomePage} />
+      <RootProvider>
+        <BrowserRouter>
+          <Switch>
+            {/* Main Pages */}
+            <Route exact path="/" component={HomePage} />
 
-          {/* Authentication Pages */}
-          <Route path="/signin" component={LoginPage} />
-          <Route path="/signup" component={SignUpPage} />
+            {/* Authentication Pages */}
+            <Route path="/signin" component={LoginPage} />
+            <Route path="/signup" component={SignUpPage} />
 
-          {/* Dashboard Pages */}
-          <Route exact path="/dashboard" component={DashboardPage} />
-        </Switch>
-      </BrowserRouter>
+            {/* Dashboard Pages */}
+            <Route exact path="/dashboard" component={DashboardPage} />
+          </Switch>
+        </BrowserRouter>
+      </RootProvider>
     </div>
   );
 };
