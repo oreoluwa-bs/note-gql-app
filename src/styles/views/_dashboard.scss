@@ -1,3 +1,15 @@
+.app-navbar {
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+
+  .btn {
+    align-self: center;
+  }
+}
+
 .side-nav {
   flex: 0 0 22%;
   width: 500px;
@@ -6,7 +18,7 @@
   // top: 0;
   // left: 0;
   // justify-self: ;
-  border-top-right-radius: 7.5rem;
+  border-top-right-radius: 5rem;
   background-color: var(--color-primary);
   padding: 2rem 0;
 
@@ -14,7 +26,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 2rem;
 
     &__icon {
       box-sizing: content-box;

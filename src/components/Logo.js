@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Logo = ({ color }) => {
+const Logo = ({ color, width, height }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="45"
-      height="67"
+      width={width}
+      height={height}
       viewBox="0 0 45 67">
       <g transform="translate(-74.5 -21)">
         <text
@@ -34,3 +34,8 @@ const Logo = ({ color }) => {
 };
 
 export default Logo;
+
+Logo.defaultProps = {
+  width: 45,
+  height: 67
+};
