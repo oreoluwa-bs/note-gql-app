@@ -53,7 +53,9 @@ const DashboardPage = () => {
           </NavLink>
         </div>
       </div>
-      <div className="note-page"></div>
+      <div className="note-page">
+        <div className="task"></div>
+      </div>
     </div>
   );
 };
