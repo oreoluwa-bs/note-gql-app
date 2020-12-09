@@ -21,7 +21,9 @@ const App = () => {
             <Route path="/signup" component={SignUpPage} />
 
             {/* Dashboard Pages */}
-            <Route exact path="/dashboard" component={DashboardPage} />
+            <Route path="/dashboard" component={DashboardPage} />
+
+            <Route>Page Not Found</Route>
           </Switch>
         </BrowserRouter>
       </RootProvider>
