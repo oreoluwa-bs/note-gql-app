@@ -1,8 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 import sprite from '../../assets/images/sprite.svg';
 
 const Sidenav = () => {
+  let currentMatch = useRouteMatch();
   return (
     <div className="side-nav">
       <div className="side-nav__header">
@@ -24,7 +25,8 @@ const Sidenav = () => {
       </div>
       <div className="side-nav__links">
         <NavLink
-          to="/dashboard"
+          exact
+          to={`${currentMatch.path}/`}
           className="side-nav__link"
           activeClassName="side-nav__link-active">
           <div className="side-nav__link__item">
@@ -36,7 +38,8 @@ const Sidenav = () => {
           </div>
         </NavLink>
         <NavLink
-          to="/dashboard/s"
+          exact
+          to={`${currentMatch.path}/note/iddd`}
           className="side-nav__link"
           activeClassName="side-nav__link-active">
           <div className="side-nav__link__item">

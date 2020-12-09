@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Sidenav from '../../components/Dashboard/Sidenav';
+import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Sidenav } from '../../components/Dashboard';
 
 import Logo from '../../components/Logo';
+import NotePage from './NotePage';
 
 const DashboardPage = () => {
+  let currentMatch = useRouteMatch();
   return (
     <div>
       <header className="header">
@@ -18,7 +20,21 @@ const DashboardPage = () => {
       <div style={{ display: 'flex' }}>
         <Sidenav />
         <div className="note-page">
-          <div className="task"></div>
+          <div className="task">
+            <Switch>
+              <Route exact path={`${currentMatch.path}/`}>
+                <div>Create new note</div>
+              </Route>
+              <Route
+                exact
+                path={`${currentMatch.path}/note/:noteSlug`}
+                component={NotePage}
+              />
+              <Route>
+                <div>Page Not found</div>
+              </Route>
+            </Switch>
+          </div>
         </div>
       </div>
     </div>
