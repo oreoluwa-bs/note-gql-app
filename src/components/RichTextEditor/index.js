@@ -1,8 +1,15 @@
+import React, { useEffect, useRef } from 'react';
 import { Editor, RichUtils } from 'draft-js';
-import React from 'react';
 import { BlockStyleControls, InlineStyleControls } from './Toolbar';
 
 const RichTextEditor = ({ editorState, setEditorState }) => {
+  const editorRef = useRef();
+
+  useEffect(() => {
+    editorRef.current.focus();
+  });
+
+  // Funtions
   const handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -40,6 +47,8 @@ const RichTextEditor = ({ editorState, setEditorState }) => {
         editorState={editorState}
         handleKeyCommand={handleKeyCommand}
         onChange={setEditorState}
+        ref={editorRef}
+        onBlur={() => console.log('save note')}
       />
     </div>
   );
