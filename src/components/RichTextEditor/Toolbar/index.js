@@ -11,22 +11,20 @@ const BLOCK_TYPES = [
 ];
 
 function StyleButton({ active, style, label, onToggle }) {
-  let className = 'RichEditor-styleButton';
+  let className = 'btn';
   if (active) {
     className += ' RichEditor-activeButton';
   }
 
   return (
-    <span
-      role="button"
-      tabIndex={-1}
+    <button
       className={className}
       onMouseDown={(e) => {
         e.preventDefault();
         onToggle(style);
       }}>
       {label}
-    </span>
+    </button>
   );
 }
 
@@ -39,7 +37,7 @@ export const BlockStyleControls = (props) => {
     .getType();
 
   return (
-    <div className="RichEditor-controls">
+    <span className="RichEditor-controls">
       {BLOCK_TYPES.map((type) => (
         <StyleButton
           key={type.label}
@@ -49,7 +47,7 @@ export const BlockStyleControls = (props) => {
           style={type.style}
         />
       ))}
-    </div>
+    </span>
   );
 };
 
@@ -64,7 +62,7 @@ export const InlineStyleControls = (props) => {
   const currentStyle = props.editorState.getCurrentInlineStyle();
 
   return (
-    <div className="RichEditor-controls">
+    <span className="RichEditor-controls">
       {INLINE_STYLES.map((type) => (
         <StyleButton
           key={type.label}
@@ -74,6 +72,6 @@ export const InlineStyleControls = (props) => {
           style={type.style}
         />
       ))}
-    </div>
+    </span>
   );
 };

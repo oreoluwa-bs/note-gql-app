@@ -21,14 +21,21 @@ const RichTextEditor = ({ editorState, setEditorState }) => {
   };
   return (
     <div>
-      <InlineStyleControls
-        editorState={editorState}
-        onToggle={toggleInlineStyle}
-      />
-      <BlockStyleControls
-        editorState={editorState}
-        onToggle={toggleBlockType}
-      />
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <span>
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={toggleInlineStyle}
+          />
+          <BlockStyleControls
+            editorState={editorState}
+            onToggle={toggleBlockType}
+          />
+        </span>
+        <span>
+          <button className="btn">Delete</button>
+        </span>
+      </div>
       <Editor
         editorState={editorState}
         handleKeyCommand={handleKeyCommand}
