@@ -21,5 +21,25 @@
   &__secondary {
     background-color: var(--color-secondary);
     color: #fff;
+
+    &:hover {
+      background-color: lighten(#52ad9c, 10);
+    }
+  }
+
+  &__danger {
+    background-color: lighten(#e71d36, 20);
+    color: #fff;
+
+    &:hover {
+      background-color: lighten(#e71d36, 10);
+    }
+  }
+
+  &--hover:hover {
+    color: var(--color-primary);
+  }
+  &--active {
+    color: var(--color-primary);
   }
 }

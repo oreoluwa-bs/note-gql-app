@@ -1,29 +1,43 @@
 import React from 'react';
+import sprite from '../../../assets/images/sprite.svg';
 
 const BLOCK_TYPES = [
-  { label: 'H1', style: 'header-one' },
-  { label: 'H2', style: 'header-two' },
-  { label: 'H3', style: 'header-three' },
-  { label: 'Blockquote', style: 'blockquote' },
-  { label: 'UL', style: 'unordered-list-item' },
-  { label: 'OL', style: 'ordered-list-item' },
-  { label: 'Code Block', style: 'code-block' }
+  { label: 'H', style: 'header-two' },
+  { label: 'Blockquote', icon: 'icon-format_quote', style: 'blockquote' },
+  {
+    label: 'UL',
+    icon: 'icon-format_list_bulleted',
+    style: 'unordered-list-item'
+  },
+  {
+    label: 'OL',
+    icon: 'icon-format_list_numbered',
+    style: 'ordered-list-item'
+  },
+  { label: 'Code Block', style: 'code-block', icon: 'icon-code' }
 ];
 
-function StyleButton({ active, style, label, onToggle }) {
-  let className = 'btn';
+function StyleButton({ active, style, label, icon, onToggle }) {
+  let className = 'btn btn--hover';
   if (active) {
-    className += ' RichEditor-activeButton';
+    className += ' btn--active';
   }
 
   return (
     <button
       className={className}
+      style={{ marginRight: '0.5rem' }}
       onMouseDown={(e) => {
         e.preventDefault();
         onToggle(style);
       }}>
-      {label}
+      {icon ? (
+        <svg className="side-nav__header__icon">
+          <use xlinkHref={`${sprite}#${icon}`} />
+        </svg>
+      ) : (
+        label
+      )}
     </button>
   );
 }
@@ -43,6 +57,7 @@ export const BlockStyleControls = (props) => {
           key={type.label}
           active={type.style === blockType}
           label={type.label}
+          icon={type.icon}
           onToggle={props.onToggle}
           style={type.style}
         />
@@ -52,10 +67,10 @@ export const BlockStyleControls = (props) => {
 };
 
 const INLINE_STYLES = [
-  { label: 'Bold', style: 'BOLD' },
-  { label: 'Italic', style: 'ITALIC' },
-  { label: 'Underline', style: 'UNDERLINE' },
-  { label: 'Monospace', style: 'CODE' }
+  { label: 'Bold', style: 'BOLD', icon: 'icon-format_bold' },
+  { label: 'Italic', style: 'ITALIC', icon: 'icon-format_italic' },
+  { label: 'Underline', style: 'UNDERLINE', icon: 'icon-format_underlined' }
+  // { label: 'Mono', style: 'CODE' }
 ];
 
 export const InlineStyleControls = (props) => {
@@ -68,6 +83,7 @@ export const InlineStyleControls = (props) => {
           key={type.label}
           active={currentStyle.has(type.style)}
           label={type.label}
+          icon={type.icon}
           onToggle={props.onToggle}
           style={type.style}
         />

@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { Editor, RichUtils } from 'draft-js';
 import { BlockStyleControls, InlineStyleControls } from './Toolbar';
+import sprite from '../../assets/images/sprite.svg';
 
-const RichTextEditor = ({ editorState, setEditorState }) => {
+const RichTextEditor = ({ editorState, setEditorState, ...otherProps }) => {
   const editorRef = useRef();
 
   useEffect(() => {
     editorRef.current.focus();
-  });
+  }, []);
 
   // Funtions
   const handleKeyCommand = (command, editorState) => {
@@ -26,10 +27,14 @@ const RichTextEditor = ({ editorState, setEditorState }) => {
   const toggleInlineStyle = (inlineStyle) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
+
+  // const setTitle = () => {
+  //   return editorState.getCurrentContent().getFirstBlock().getText();
+  // };
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <span>
+      <div className="toolbar">
+        <span style={{ display: 'flex' }}>
           <InlineStyleControls
             editorState={editorState}
             onToggle={toggleInlineStyle}
@@ -40,7 +45,11 @@ const RichTextEditor = ({ editorState, setEditorState }) => {
           />
         </span>
         <span>
-          <button className="btn">Delete</button>
+          <button className="btn btn__danger">
+            <svg className="side-nav__header__icon">
+              <use xlinkHref={`${sprite}#icon-delete`} />
+            </svg>
+          </button>
         </span>
       </div>
       <Editor
@@ -48,7 +57,7 @@ const RichTextEditor = ({ editorState, setEditorState }) => {
         handleKeyCommand={handleKeyCommand}
         onChange={setEditorState}
         ref={editorRef}
-        onBlur={() => console.log('save note')}
+        onBlur={() => console.log('save note', otherProps)}
       />
     </div>
   );
