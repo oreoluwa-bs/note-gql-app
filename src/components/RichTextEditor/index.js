@@ -52,13 +52,22 @@ const RichTextEditor = ({ editorState, setEditorState, ...otherProps }) => {
           </button>
         </span>
       </div>
-      <Editor
-        editorState={editorState}
-        handleKeyCommand={handleKeyCommand}
-        onChange={setEditorState}
-        ref={editorRef}
-        onBlur={() => console.log('save note', otherProps)}
-      />
+      <div
+        className="richtext-editor-container"
+        role="textbox"
+        onClick={() => editorRef.current.focus()}
+        // tabIndex={-1}
+        aria-hidden="true"
+        // aria-placeholder="text-editor"
+        aria-labelledby="note">
+        <Editor
+          editorState={editorState}
+          handleKeyCommand={handleKeyCommand}
+          onChange={setEditorState}
+          ref={editorRef}
+          onBlur={() => console.log('save note', otherProps)}
+        />
+      </div>
     </div>
   );
 };
