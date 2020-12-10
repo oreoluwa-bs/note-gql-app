@@ -12,7 +12,7 @@ const DashboardPage = () => {
       <header className="header">
         <nav className="app-navbar" style={{}}>
           <Link className="logo" to="/">
-            <Logo color="#fff" width={35} height={57} />
+            <Logo color="#fff" width={35} height={45} />
           </Link>
           <button className="btn">Logout</button>
         </nav>
