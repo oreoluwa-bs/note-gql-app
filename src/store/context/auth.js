@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import cookie from 'react-cookies';
 import { gql, useMutation } from '@apollo/client';
 
@@ -31,8 +31,13 @@ const SIGNUP_USER = gql`
 `;
 
 const AuthContextProvider = ({ children }) => {
-  const initAuth = cookie.load('_auth') || null;
-  const [auth, setAuth] = useState(initAuth);
+  const [auth, setAuth] = useState({});
+
+  useEffect(() => {
+    const initAuth = cookie.load('_auth') || null;
+    setAuth(initAuth);
+    console.log(initAuth);
+  }, []);
 
   const [handleSignUpUser] = useMutation(SIGNUP_USER, {
     ignoreResults: false
@@ -43,7 +48,7 @@ const AuthContextProvider = ({ children }) => {
   });
 
   const handleSetAuthToken = ({ token, record }) => {
-    const cookieSettings = { path: '/', httpOnly: true };
+    const cookieSettings = { path: '/', httpOnly: false };
     setAuth(record);
     cookie.save('_auth', record, cookieSettings);
     cookie.save('_token', token, cookieSettings);
