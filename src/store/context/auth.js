@@ -36,7 +36,6 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const initAuth = cookie.load('_auth') || null;
     setAuth(initAuth);
-    console.log(initAuth);
   }, []);
 
   const [handleSignUpUser] = useMutation(SIGNUP_USER, {

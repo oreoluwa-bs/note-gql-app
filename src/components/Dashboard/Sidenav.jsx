@@ -1,8 +1,67 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { gql, useQuery } from '@apollo/client';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 import sprite from '../../assets/images/sprite.svg';
+import { AuthContext } from '../../store/context/auth';
+
+const GET_MY_NOTES = gql`
+  query GetMyNotes($author: MongoID!) {
+    getNotes(filter: { author: $author }) {
+      _id
+      title
+      slug
+      content
+      author {
+        _id
+      }
+    }
+  }
+`;
+
+// eslint-disable-next-line no-unused-vars
+const GET_MY_NOTE = gql`
+  query GetMyNote($slug: String!) {
+    getNoteByField(filter: { slug: $slug }) {
+      _id
+      title
+      slug
+      content
+      author {
+        _id
+      }
+    }
+  }
+`;
+
+const NavLinkss = ({ currentMatch, author }) => {
+  const { loading, error, data } = useQuery(GET_MY_NOTES, {
+    variables: { author },
+    pollInterval: 1000000
+  });
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+  return (
+    <div>
+      {data.getNotes.map(({ slug, title, content }) => (
+        <NavLink
+          key={slug}
+          exact
+          to={`${currentMatch.path}/note/${slug}`}
+          className="side-nav__link"
+          activeClassName="side-nav__link-active">
+          <div className="side-nav__link__item">
+            <h3>{title}</h3>
+            <span>{content.substring(0, 8) + '...'}</span>
+          </div>
+        </NavLink>
+      ))}
+    </div>
+  );
+};
 
 const Sidenav = () => {
+  const { auth } = useContext(AuthContext);
   let currentMatch = useRouteMatch();
   return (
     <div className="side-nav">
@@ -24,32 +83,9 @@ const Sidenav = () => {
         </div>
       </div>
       <div className="side-nav__links">
-        <NavLink
-          exact
-          to={`${currentMatch.path}/`}
-          className="side-nav__link"
-          activeClassName="side-nav__link-active">
-          <div className="side-nav__link__item">
-            <h3>Lorem Ipsum</h3>
-            <span>
-              The quick, brown fox jumps over a lazy dog. DJs flock by when MTV
-              ax quiz prog.
-            </span>
-          </div>
-        </NavLink>
-        <NavLink
-          exact
-          to={`${currentMatch.path}/note/iddd`}
-          className="side-nav__link"
-          activeClassName="side-nav__link-active">
-          <div className="side-nav__link__item">
-            <h3>Lorem Ipsum</h3>
-            <span>
-              The quick, brown fox jumps over a lazy dog. DJs flock by when MTV
-              ax quiz prog.
-            </span>
-          </div>
-        </NavLink>
+        {auth?._id && (
+          <NavLinkss author={auth._id} currentMatch={currentMatch} />
+        )}
       </div>
     </div>
   );
