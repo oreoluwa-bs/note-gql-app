@@ -3,6 +3,7 @@ import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Sidenav } from '../../components/Dashboard';
 
 import Logo from '../../components/Logo';
+import { PageNotFoundPage } from '../Main';
 import NotePage from './NotePage';
 
 const DashboardPage = () => {
@@ -30,9 +31,7 @@ const DashboardPage = () => {
                 path={`${currentMatch.path}/note/:noteSlug`}
                 component={NotePage}
               />
-              <Route>
-                <div>Page Not found</div>
-              </Route>
+              <Route component={PageNotFoundPage} />
             </Switch>
           </div>
         </div>

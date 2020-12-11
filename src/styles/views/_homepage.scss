@@ -59,3 +59,18 @@
     font-size: 1.6rem;
   }
 }
+
+.error {
+  text-align: center;
+
+  &__status {
+    font-size: 15rem;
+    color: var(--color-secondary);
+  }
+
+  &__message {
+    margin: 2rem 0 4rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}

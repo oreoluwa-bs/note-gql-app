@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { HomePage } from './views/Main';
+import { HomePage, PageNotFoundPage } from './views/Main';
 import { LoginPage, SignUpPage } from './views/Auth';
 import './styles/App.scss';
 import DashboardPage from './views/Dashboard/DashboardPage';
@@ -23,7 +23,7 @@ const App = () => {
             {/* Dashboard Pages */}
             <Route path="/dashboard" component={DashboardPage} />
 
-            <Route>Page Not Found</Route>
+            <Route component={PageNotFoundPage} />
           </Switch>
         </BrowserRouter>
       </RootProvider>
