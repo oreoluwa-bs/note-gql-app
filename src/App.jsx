@@ -23,7 +23,9 @@ const App = () => {
             {/* Dashboard Pages */}
             <Route path="/dashboard" component={DashboardPage} />
 
-            <Route component={PageNotFoundPage} />
+            <Route>
+              <PageNotFoundPage showNav />
+            </Route>
           </Switch>
         </BrowserRouter>
       </RootProvider>
