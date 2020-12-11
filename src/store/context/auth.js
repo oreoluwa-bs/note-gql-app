@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import cookie from 'react-cookies';
 import { gql, useMutation } from '@apollo/client';
 
 export const AuthContext = createContext();
@@ -30,7 +31,7 @@ const SIGNUP_USER = gql`
 `;
 
 const AuthContextProvider = ({ children }) => {
-  const initAuth = JSON.parse(localStorage.getItem('auth')) || null;
+  const initAuth = cookie.load('_auth') || null;
   const [auth, setAuth] = useState(initAuth);
 
   const [handleSignUpUser] = useMutation(SIGNUP_USER, {
@@ -41,8 +42,17 @@ const AuthContextProvider = ({ children }) => {
     ignoreResults: false
   });
 
-  const handleSetAuthToken = async (token) => {
-    console.log(token);
+  const handleSetAuthToken = ({ token, record }) => {
+    const cookieSettings = { path: '/', httpOnly: true };
+    setAuth(record);
+    cookie.save('_auth', record, cookieSettings);
+    cookie.save('_token', token, cookieSettings);
+  };
+
+  const handleSignOut = () => {
+    cookie.remove('_auth');
+    cookie.remove('_token');
+    setAuth(null);
   };
 
   const handleSignIn = async ({ email, password }) => {
@@ -50,8 +60,7 @@ const AuthContextProvider = ({ children }) => {
       const res = await handleSignInUser({ variables: { email, password } });
       const { data } = res;
 
-      setAuth(data.loginUser.record);
-      handleSetAuthToken(data.loginUser.token);
+      handleSetAuthToken(data.loginUser);
 
       return data.loginUser.record;
     } catch (error) {
@@ -65,8 +74,7 @@ const AuthContextProvider = ({ children }) => {
       const res = await handleSignUpUser({ variables: { email, password } });
       const { data } = res;
 
-      setAuth(data.signUpUser.record);
-      handleSetAuthToken(data.signUpUser.token);
+      handleSetAuthToken(data.signUpUser);
 
       return data.signUpUser.record;
     } catch (error) {
@@ -76,7 +84,8 @@ const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, handleSignIn, handleSignUp }}>
+    <AuthContext.Provider
+      value={{ auth, handleSignIn, handleSignUp, handleSignOut }}>
       {children}
     </AuthContext.Provider>
   );
