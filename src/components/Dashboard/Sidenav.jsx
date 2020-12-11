@@ -1,52 +1,9 @@
 import React, { useContext } from 'react';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import sprite from '../../assets/images/sprite.svg';
 import { AuthContext } from '../../store/context/auth';
-
-const GET_MY_NOTES = gql`
-  query GetMyNotes($author: MongoID!) {
-    getNotes(filter: { author: $author }) {
-      _id
-      title
-      slug
-      content
-      author {
-        _id
-      }
-    }
-  }
-`;
-
-// eslint-disable-next-line no-unused-vars
-const GET_MY_NOTE = gql`
-  query GetMyNote($slug: String!) {
-    getNoteByField(filter: { slug: $slug }) {
-      _id
-      title
-      slug
-      content
-      author {
-        _id
-      }
-    }
-  }
-`;
-
-const CREATE_NOTE = gql`
-  mutation CreateNote($content: String!, $author: MongoID!) {
-    createNote(record: { content: $content, author: $author }) {
-      recordId
-      record {
-        _id
-        title
-        content
-        slug
-        createdAt
-      }
-    }
-  }
-`;
+import { CREATE_NOTE, GET_MY_NOTES } from '../../store/schema/noteQueries';
 
 const NavLinkss = ({ currentMatch, author }) => {
   const { loading, error, data } = useQuery(GET_MY_NOTES, {
@@ -84,6 +41,15 @@ const Sidenav = () => {
     ignoreResults: false
   });
 
+  const handleNoteCreation = async () => {
+    const res = await handleCreateNote({
+      variables: { author: auth._id }
+    });
+
+    const { slug } = res.data.createNote.record;
+    history.push(`${currentMatch.path}/note/${slug}`);
+  };
+
   return (
     <div className="side-nav">
       <div className="side-nav__header">
@@ -91,16 +57,7 @@ const Sidenav = () => {
           My Notes
         </h2>
         <div>
-          <button
-            className="btn btn__primary"
-            onClick={async () => {
-              const res = await handleCreateNote({
-                variables: { author: auth._id, content: 'hi' }
-              });
-
-              const { slug } = res.data.createNote.record;
-              history.push(`${currentMatch.path}/note/${slug}`);
-            }}>
+          <button className="btn btn__primary" onClick={handleNoteCreation}>
             <svg className="side-nav__header__icon">
               <use xlinkHref={`${sprite}#icon-plus`} />
             </svg>
