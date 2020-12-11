@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import sprite from '../../assets/images/sprite.svg';
 import { AuthContext } from '../../store/context/auth';
 
@@ -33,10 +33,25 @@ const GET_MY_NOTE = gql`
   }
 `;
 
+const CREATE_NOTE = gql`
+  mutation CreateNote($content: String!, $author: MongoID!) {
+    createNote(record: { content: $content, author: $author }) {
+      recordId
+      record {
+        _id
+        title
+        content
+        slug
+        createdAt
+      }
+    }
+  }
+`;
+
 const NavLinkss = ({ currentMatch, author }) => {
   const { loading, error, data } = useQuery(GET_MY_NOTES, {
     variables: { author },
-    pollInterval: 1000000
+    pollInterval: 1000
   });
 
   if (loading) return 'Loading...';
@@ -62,7 +77,13 @@ const NavLinkss = ({ currentMatch, author }) => {
 
 const Sidenav = () => {
   const { auth } = useContext(AuthContext);
+  const history = useHistory();
   let currentMatch = useRouteMatch();
+
+  const [handleCreateNote] = useMutation(CREATE_NOTE, {
+    ignoreResults: false
+  });
+
   return (
     <div className="side-nav">
       <div className="side-nav__header">
@@ -70,7 +91,16 @@ const Sidenav = () => {
           My Notes
         </h2>
         <div>
-          <button className="btn btn__primary">
+          <button
+            className="btn btn__primary"
+            onClick={async () => {
+              const res = await handleCreateNote({
+                variables: { author: auth._id, content: 'hi' }
+              });
+
+              const { slug } = res.data.createNote.record;
+              history.push(`${currentMatch.path}/note/${slug}`);
+            }}>
             <svg className="side-nav__header__icon">
               <use xlinkHref={`${sprite}#icon-plus`} />
             </svg>
