@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import sprite from '../../assets/images/sprite.svg';
 import { AuthContext } from '../../store/context/auth';
 import { CREATE_NOTE, GET_MY_NOTES } from '../../store/schema/noteQueries';
@@ -24,7 +24,7 @@ const NavLinkss = ({ currentMatch, author }) => {
           activeClassName="side-nav__link-active">
           <div className="side-nav__link__item">
             <h3>{title}</h3>
-            <span>{content.substring(0, 8) + '...'}</span>
+            {content && <span>{content.substring(0, 8) + '...'}</span>}
           </div>
         </NavLink>
       ))}
@@ -54,7 +54,7 @@ const Sidenav = () => {
     <div className="side-nav">
       <div className="side-nav__header">
         <h2 className="heading" style={{ color: '#fff' }}>
-          My Notes
+          <Link to={`${currentMatch.path}/`}>My Notes</Link>
         </h2>
         <div>
           <button className="btn btn__primary" onClick={handleNoteCreation}>
@@ -62,11 +62,11 @@ const Sidenav = () => {
               <use xlinkHref={`${sprite}#icon-plus`} />
             </svg>
           </button>
-          <button className="btn btn__primary">
+          {/* <button className="btn btn__primary">
             <svg className="side-nav__header__icon">
               <use xlinkHref={`${sprite}#icon-magnifying-glass`} />
             </svg>
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="side-nav__links">

@@ -32,6 +32,12 @@
 .heading {
   // font-size: 1.8rem;
   margin-bottom: 0.5rem;
+
+  a:link,
+  a:visited {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 .heading-subtitle {
   font-size: 1.4rem;

@@ -29,7 +29,7 @@ export const GET_MY_NOTE = gql`
 `;
 
 export const CREATE_NOTE = gql`
-  mutation CreateNote($content: String!, $author: MongoID!) {
+  mutation CreateNote($content: String, $author: MongoID!) {
     createNote(record: { content: $content, author: $author }) {
       recordId
       record {
