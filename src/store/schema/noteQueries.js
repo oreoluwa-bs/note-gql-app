@@ -42,3 +42,28 @@ export const CREATE_NOTE = gql`
     }
   }
 `;
+
+export const UPDATE_NOTE = gql`
+  mutation UpdateNote($_id: MongoID!, $record: UpdateByIdNoteInput!) {
+    updateNoteById(_id: $_id, record: $record) {
+      recordId
+      record {
+        _id
+        title
+        content
+        slug
+        createdAt
+      }
+    }
+  }
+`;
+
+export const DELETE_NOTE = gql`
+  mutation DeleteNote($_id: MongoID!) {
+    deleteNoteById(_id: $_id) {
+      error {
+        message
+      }
+    }
+  }
+`;
