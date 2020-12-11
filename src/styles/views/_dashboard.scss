@@ -79,3 +79,22 @@
   cursor: text;
   min-height: 40vh;
 }
+
+.welcome {
+  // text-align: center;
+  color: var(--color-darkgrey-1);
+
+  &__status {
+    font-size: 4rem;
+    // color: var(--color-secondary);
+  }
+
+  &__message {
+    margin: 2rem 0;
+    font-size: 2rem;
+
+    &:last-of-type {
+      margin: 2rem 0 4rem;
+    }
+  }
+}
