@@ -42,7 +42,7 @@ const RichTextEditor = ({ editorState, setEditorState, ...otherProps }) => {
           />
         </span>
         <span>
-          <button className="btn btn__danger">
+          <button className="btn btn__danger" onClick={otherProps.deleteNote}>
             <svg className="side-nav__header__icon">
               <use xlinkHref={`${sprite}#icon-delete`} />
             </svg>
