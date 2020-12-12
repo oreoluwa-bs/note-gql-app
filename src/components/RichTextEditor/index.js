@@ -28,9 +28,6 @@ const RichTextEditor = ({ editorState, setEditorState, ...otherProps }) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
-  // const setTitle = () => {
-  //   return editorState.getCurrentContent().getFirstBlock().getText();
-  // };
   return (
     <div>
       <div className="toolbar">
@@ -56,16 +53,13 @@ const RichTextEditor = ({ editorState, setEditorState, ...otherProps }) => {
         className="richtext-editor-container"
         role="textbox"
         onClick={() => editorRef.current.focus()}
-        // tabIndex={-1}
-        aria-hidden="true"
-        // aria-placeholder="text-editor"
-        aria-labelledby="note">
+        aria-hidden="true">
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
           onChange={setEditorState}
           ref={editorRef}
-          onBlur={() => console.log('save note', otherProps)}
+          onBlur={otherProps.onBlur}
         />
       </div>
     </div>

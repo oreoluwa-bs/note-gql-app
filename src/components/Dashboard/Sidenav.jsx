@@ -4,6 +4,7 @@ import { Link, NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import sprite from '../../assets/images/sprite.svg';
 import { AuthContext } from '../../store/context/auth';
 import { CREATE_NOTE, GET_MY_NOTES } from '../../store/schema/noteQueries';
+import { convertFromRaw } from 'draft-js';
 
 const NavLinkss = ({ currentMatch, author }) => {
   const { loading, error, data } = useQuery(GET_MY_NOTES, {
@@ -15,19 +16,26 @@ const NavLinkss = ({ currentMatch, author }) => {
   if (error) return `Error! ${error.message}`;
   return (
     <div>
-      {data.getNotes.map(({ slug, title, content }) => (
-        <NavLink
-          key={slug}
-          exact
-          to={`${currentMatch.path}/note/${slug}`}
-          className="side-nav__link"
-          activeClassName="side-nav__link-active">
-          <div className="side-nav__link__item">
-            <h3>{title}</h3>
-            {content && <span>{content.substring(0, 8) + '...'}</span>}
-          </div>
-        </NavLink>
-      ))}
+      {data.getNotes.map(({ slug, title, content }) => {
+        const contentFromRaw = convertFromRaw(JSON.parse(content));
+        const contentText = contentFromRaw.getPlainText();
+        return (
+          <NavLink
+            key={slug}
+            exact
+            to={{
+              pathname: `${currentMatch.path}/note/${slug}`,
+              state: { isNew: false }
+            }}
+            className="side-nav__link"
+            activeClassName="side-nav__link-active">
+            <div className="side-nav__link__item">
+              <h3>{title}</h3>
+              {content && <span>{contentText.substring(0, 25) + '...'}</span>}
+            </div>
+          </NavLink>
+        );
+      })}
     </div>
   );
 };
@@ -47,7 +55,7 @@ const Sidenav = () => {
     });
 
     const { slug } = res.data.createNote.record;
-    history.push(`${currentMatch.path}/note/${slug}`);
+    history.push(`${currentMatch.path}/note/${slug}`, { isNew: true });
   };
 
   return (

@@ -17,7 +17,7 @@ const DashboardHome = ({ history }) => {
     });
 
     const { slug } = res.data.createNote.record;
-    history.push(`${currentMatch.path}note/${slug}`);
+    history.push(`${currentMatch.path}note/${slug}`, { isNew: true });
   };
 
   return (
