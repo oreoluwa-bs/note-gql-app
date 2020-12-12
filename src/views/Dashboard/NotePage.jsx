@@ -41,13 +41,13 @@ const NotePage = (props) => {
       );
       setEditorState(EditorState.createWithContent(state));
     }
-  }, [props.match.params.noteSlug, data?.getNoteByField?.content]);
+  }, [props.match.params.noteSlug, data?.getNoteByField?._id]);
 
   useEffect(() => {
-    if (!data?.getNoteByField?.content && !loading) {
+    if (!data?.getNoteByField?._id && !loading) {
       props.history.push('/dashboard');
     }
-  }, [data?.getNoteByField?.content, loading]);
+  }, [data?.getNoteByField?._id, loading]);
 
   const handleSaveNote = async () => {
     const editorStateContent = editorState.getCurrentContent();
@@ -62,6 +62,7 @@ const NotePage = (props) => {
   const handleDeleteNote = async () => {
     const _id = data.getNoteByField._id;
     await deleteNoteMutation({ variables: { _id } });
+    props.history.push('/dashboard');
   };
 
   return (

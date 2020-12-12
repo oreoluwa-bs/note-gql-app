@@ -17,8 +17,11 @@ const NavLinkss = ({ currentMatch, author }) => {
   return (
     <div>
       {data.getNotes.map(({ slug, title, content }) => {
-        const contentFromRaw = convertFromRaw(JSON.parse(content));
-        const contentText = contentFromRaw.getPlainText();
+        let contentText = '';
+        if (content) {
+          const contentFromRaw = convertFromRaw(JSON.parse(content));
+          contentText = contentFromRaw.getPlainText();
+        }
         return (
           <NavLink
             key={slug}
